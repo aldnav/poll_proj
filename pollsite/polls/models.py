@@ -28,8 +28,12 @@ class Poll(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.s = slugify(self.question)
+            self.slug = slugify(self.question)
         super(Poll, self).save(*args, **kwargs)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('polls:detail', (self.slug,self.id))
 
 class Choice(models.Model):
     poll = models.ForeignKey(Poll)
