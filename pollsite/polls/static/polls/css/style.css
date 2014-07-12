@@ -1,0 +1,8 @@
+html {
+	font-family: "LiberationMono-Regular";
+}
+
+@font-face {
+    font-family: "LiberationMono-Regular";
+    src: url("../fonts/LiberationMono-Regular.ttf");
+}
