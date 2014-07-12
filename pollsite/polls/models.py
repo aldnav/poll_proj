@@ -8,12 +8,14 @@ class Poll(models.Model):
     question = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date_published')
     flags = models.IntegerField(default=0)
+    answers = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.question
 
     def was_published_recently(self):
         now = timezone.now()
+        # print now, self.pub_date
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     was_published_recently.admin_order_field = 'pub_date'
@@ -26,6 +28,20 @@ class Poll(models.Model):
     was_flagged.admin_order_field = 'flags'
     was_flagged.boolean = False
     was_flagged.short_description = 'Was flagged?'
+
+    def get_number_of_answers(self):
+        return len(Choice.objects.filter(poll_id=self.id))
+
+    def get_number_of_days_past(self):
+        delta = str(timezone.now() - self.pub_date).split(':')
+        passed = None
+        if int(delta[0]) != 0:
+            passed = delta[0] + ' days'
+        elif int(delta[1]) >= 1:
+            passed = delta[1] + ' minutes'
+        else:
+            passed = delta[2].split('.')[0] + ' seconds' 
+        return passed
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -46,6 +62,7 @@ class Choice(models.Model):
 
 class Voter(models.Model):
     ip = models.CharField(max_length=200)
+    poll = models.ForeignKey(Poll)
     choice = models.ForeignKey(Choice)
 
     def __unicode__(self):
