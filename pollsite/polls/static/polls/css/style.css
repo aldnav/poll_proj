@@ -1,8 +1,123 @@
 html {
-	font-family: "LiberationMono-Regular";
+	background-color: #DEDEDE;
+	color: #292929;
+	font-family: "Roboto-Light";
+	width: 100%;
+	height: 100%;
 }
 
-@font-face {
-    font-family: "LiberationMono-Regular";
-    src: url("../fonts/LiberationMono-Regular.ttf");
+body {
+	margin: 0 auto;
+}
+
+.wrapper {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.container {
+	width: 40%;
+	margin-left: 30%;
+}
+
+.titleheader {
+	padding: 1em 4em;
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+
+.titleheader a {
+	text-decoration: none;
+	color: white;
+	transition: all 0.2s;
+	opacity: 0.85;
+}
+
+.titleheader a:hover{
+	opacity: 1;
+}
+
+.titleheader h3 span {
+	color: #0495D2;
+}
+
+h4 span {
+	font-family: "Roboto-Thin";
+	color: #ED195A;
+	border-bottom: 3px solid #ED195A;
+}
+
+td a {
+	color: #0495D2;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+td a:hover {
+	color: #0371A0;
+}
+
+table {
+	width: 100%;
+	border-spacing: 2em 0;
+}
+
+.question-container {
+	/*background-color: white;*/
+	color: #666;
+}
+
+.question-container form {
+	padding: 1em 4em;
+}
+
+.question-container form input {
+	color: #292929;
+	font-family: "Roboto-Light"
+}
+
+.question-container form input[type="submit"], .conf-button {
+	float: right;
+	padding: 0.5em 1.5em;
+	font-family: "Montserrat-Regular";
+	background-color: #ED195A;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	opacity: 0.75;
+	text-decoration: none;
+	font-size: 0.65em;
+	transition: all 0.4s;
+}
+
+.question-container strong {
+	color: #ED195A;
+}
+
+.question-container form input[type="submit"]:hover, .conf-button:hover {
+	opacity: 1.0;
+}
+
+.question-container form h2 {
+	padding-top: 1em;
+	text-align: center;
+	font-family: "Roboto-Thin"
+}
+
+.result-container {
+	color: #666;
+}
+
+.result-container h2 {
+	padding-top: 1.65em;
+	text-align: center;
+	font-family: "Roboto-Thin";
+}
+
+.result-container li {
+	font-family: "Roboto-Light";
+	padding-left: 2em;
+	list-style: none;
 }
