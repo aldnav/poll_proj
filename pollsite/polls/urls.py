@@ -13,4 +13,6 @@ urlpatterns = patterns('',
 	url(r'^(?P<poll_slug>[-\w]+),(?P<poll_id>\d+)/results/$', views.ResultsView.as_view(), name='results'),
 	# /polls/a-question,1/vote/
 	url(r'^(?P<poll_slug>[-\w]+),(?P<poll_id>\d+)/vote/$', views.vote, name='vote'),
+	# /polls/ask
+	url(r'^ask/$', views.ask, name='ask'),
 )
