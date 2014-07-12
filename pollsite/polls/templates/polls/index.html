@@ -1,11 +1,42 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}" />
+
 {% if latest_polls %}
-    <ul>
+	<h4>Latest Polls</h4>
+    <table>
+    <tr>
+    	<th>POLL</th>
+    	<th>ADDED</th>
+    	<th>HITS</th>
+    </tr>
     {% for poll in latest_polls %}
-        <!-- <li><a href="/polls/{{ poll.slug }},{{ poll.id }}/">{{ poll.question }}</a></li> -->
-        <!-- <li><a href="{{ poll.get_absolute_url }}">{{ poll.question }}</a></li> -->
-        <li><a href="{% url 'polls:detail' poll.slug poll.id %}">{{ poll.question }}</a></li>
+		<tr>
+			<td><a href="{% url 'polls:detail' poll.slug poll.id %}">{{ poll.question }}</a></td>
+			<td>{{ poll.get_number_of_days_past }} ago</td>
+			<td>{{ poll.answers }}</td>
+		</tr>
     {% endfor %}
-    </ul>
+    </table>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% if trending_polls %}
+	<h4>Trending Polls</h4>
+    <table>
+    <tr>
+    	<th>POLL</th>
+    	<th>ADDED</th>
+    	<th>HITS</th>
+    </tr>
+    {% for poll in trending_polls %}
+		<tr>
+			<td><a href="{% url 'polls:detail' poll.slug poll.id %}">{{ poll.question }}</a></td>
+			<td>{{ poll.get_number_of_days_past }} ago</td>
+			<td>{{ poll.answers }}</td>
+		</tr>
+    {% endfor %}
+    </table>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
