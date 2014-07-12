@@ -3,8 +3,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
+from ipware.ip import get_ip
 
-from polls.models import Poll, Choice
+from polls.models import Poll, Choice, Voter
 
 # Create your views here.
 
@@ -17,6 +18,12 @@ class IndexView(generic.ListView):
         Return five of the latest published polls excluding future publish posts
         '''
         return Poll.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+        # return Poll.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['trending_polls'] = Poll.objects.order_by('-answers')[:10]
+        return context
 
 
 class DetailView(generic.DetailView):
@@ -46,6 +53,13 @@ def vote(request, poll_slug, poll_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
+        poll.answers += 1
+        poll.save()
+        # get the ip address of the voter
+        ip = get_ip(request)
+        if ip:
+            voter = Voter(ip=ip, choice_id=selected_choice.id, poll_id=poll.id)
+            voter.save()
 
         return HttpResponseRedirect(reverse('polls:results', args=(poll.slug, poll.id)))
 
