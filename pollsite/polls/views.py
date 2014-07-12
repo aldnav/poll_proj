@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
-from django.views import generic
 from django.utils import timezone
+from django.views import generic
 from ipware.ip import get_ip
 
 from polls.models import Poll, Choice, Voter
@@ -47,7 +48,7 @@ def vote(request, poll_slug, poll_id):
         selected_choice = poll.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         return render(request, 'polls/detail.html', {
-            'poll': p,
+            'poll': poll,
             'error_message': "You did not select a valid choice!"
         })
     else:
@@ -63,7 +64,18 @@ def vote(request, poll_slug, poll_id):
 
         return HttpResponseRedirect(reverse('polls:results', args=(poll.slug, poll.id)))
 
-
+def ask(request):
+    if request.POST:
+        question = request.POST['question']
+        try:
+            poll = Poll.objects.get(question=question)
+            # return with error Poll already exist
+        except Poll.DoesNotExist:
+            poll = Poll(question=question, pub_date=timezone.now())
+            poll.save()
+    args = {}
+    args.update(csrf(request))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'),'/')
 
 # def index(request):
 #     latest_polls = Poll.objects.order_by('-pub_date')[:5]
