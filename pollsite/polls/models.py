@@ -8,7 +8,7 @@ class Poll(models.Model):
     question = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date_published')
     flags = models.IntegerField(default=0)
-    answers = models.IntegerField(default=0)
+    answers = models.IntegerField(default=0)    # this is count for answers, not answers themselves
 
     def __unicode__(self):
         return self.question
@@ -36,7 +36,10 @@ class Poll(models.Model):
         delta = str(timezone.now() - self.pub_date).split(':')
         passed = None
         if int(delta[0]) != 0:
-            passed = delta[0] + ' days'
+            if int(delta[0]) >= 24:
+                passed = str(int(delta[0])/24) + ' days'    
+            else:
+                passed = delta[0] + ' hours'
         elif int(delta[1]) >= 1:
             passed = delta[1] + ' minutes'
         else:
