@@ -1,5 +1,5 @@
 from django.contrib import admin
-from polls.models import Poll, Choice
+from polls.models import Poll, Choice, Voter
 
 # Register your models here.
 class ChoiceInline(admin.TabularInline):
@@ -8,7 +8,7 @@ class ChoiceInline(admin.TabularInline):
 
 class PollAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None,			{'fields': ['question','flags']}),
+		(None,			{'fields': ['question','flags','answers']}),
 		('Date info', 	{'fields': ['pub_date']}),
 	]
 	inlines = [ChoiceInline]
@@ -16,4 +16,11 @@ class PollAdmin(admin.ModelAdmin):
 	list_filter = ['pub_date']
 	search_fields = ['question', 'pub_date']
 
+class VoterAdmin(admin.ModelAdmin):
+	fieldsets = [
+		(None,			{'fields':['ip','choice', 'poll']}),		
+	]
+	list_display = ('ip', 'choice', 'poll')
+
 admin.site.register(Poll, PollAdmin)
+admin.site.register(Voter, VoterAdmin)
