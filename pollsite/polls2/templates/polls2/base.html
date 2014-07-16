@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %} {% endblock %} | Pollbin</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'polls2/css/fonts.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'polls2/css/style.css' %}" />
+</head>
+<body>
+	<header>
+		<div id="logo"><a href="{% url 'polls2:index' %}"><h1>P<span class="emphasis">O</span>LLBIN2</h1>DJANGO DEMO POLLING SITE</a></div>
+	</header>
+	<div class="container card">
+	{% block body_block %}{% endblock %}
+	</div>
+</body>
+</html>
