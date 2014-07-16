@@ -1,5 +1,4 @@
 #POLLBIN
----
 A demo project for Django development.
 
 | Branch | Attempt | Improvements|
