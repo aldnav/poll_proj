@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     # third-party apps
     'south',
     # local apps
-    'polls'
+    'polls',
+    'polls2'
 )
 
 MIDDLEWARE_CLASSES = (
