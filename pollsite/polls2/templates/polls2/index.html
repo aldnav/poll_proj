@@ -1,9 +1,33 @@
+{% extends 'polls2/base.html' %}
+{% block title %}Welcome to Pollbin!{% endblock %}
+
+{% block body_block %}
+<div id="content">
 {% if latest_poll_list %}
+	<h3><span>LATEST</span></h3>
     <ul>
     {% for poll in latest_poll_list %}
-        <li><a href="{% url 'polls2:detail' poll.slug poll.id %}">{{ poll.question }}</a></li>
+        <li>
+        	<a href="{% url 'polls2:detail' poll.slug poll.id %}">{{ poll.question|title }}</a>
+        	<span>{{ poll.pub_date|date:"M d Y" }} {{ poll.answers }} hit{{poll.answers|pluralize}}</span>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+{% if trending_polls %}
+	<h3><span>TRENDING</span></h3>
+    <ul>
+    {% for poll in trending_polls %}
+        <li>
+	        <a href="{% url 'polls2:detail' poll.slug poll.id %}">{{ poll.question|title }}</a>
+	        <span>{{ poll.pub_date|date:"M d Y" }} {{ poll.answers }} hit{{poll.answers|pluralize}}</span>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</div>
+{% endblock %}
