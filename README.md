@@ -1,4 +1,4 @@
-POLLBIN
+#POLLBIN
 ---
 A demo project for Django development.
 
@@ -7,5 +7,5 @@ A demo project for Django development.
 | master | first   | Gather user-info (ip)
 | second | second  | Use of templates
 
-##Further extensions:
+###Further extensions:
   *Implementation of AJAX
