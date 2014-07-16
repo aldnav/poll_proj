@@ -7,20 +7,24 @@ from ipware.ip import get_ip
 
 from polls2.models import Poll, Choice, Voter
 
-def index(request):	
-	context = {}
-	context['latest_poll_list'] = Poll.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
-	return render(request, 'polls2/index.html', context)
+class IndexView(generic.ListView):
+	template_name = 'polls2/index.html'
+	context_object_name = 'latest_poll_list'
 
-def detail(request, poll_slug, poll_id):
-	try:
-		poll = Poll.objects.get(pk=poll_id)
-	except Poll.DoesNotExist:
-		raise Http404
-	context = {
-		'poll': poll,
-	}
-	return render(request, 'polls2/detail.html', context)
+	def get_queryset(self):
+		return Poll.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+
+	def get_context_data(self, **kwargs):
+		context = super(IndexView, self).get_context_data(**kwargs)
+		context['trending_polls'] = Poll.objects.order_by('-answers')[:10]
+		return context
+
+class DetailView(generic.DetailView):
+	model = Poll
+	template_name = 'polls2/detail.html'
+
+	def get_object(self, *args, **kwargs):
+		return get_object_or_404(Poll, pk=self.kwargs['poll_id'])
 
 class ResultsView(generic.DetailView):
     model = Poll
@@ -49,3 +53,18 @@ def vote(request, poll_slug, poll_id):
 			voter.save()
 
 		return HttpResponseRedirect(reverse('polls2:results', args=(poll.slug, poll.id)))
+
+# def index(request):	
+# 	context = {}
+# 	context['latest_poll_list'] = Poll.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+# 	return render(request, 'polls2/index.html', context)
+
+# def detail(request, poll_slug, poll_id):
+# 	try:
+# 		poll = Poll.objects.get(pk=poll_id)
+# 	except Poll.DoesNotExist:
+# 		raise Http404
+# 	context = {
+# 		'poll': poll,
+# 	}
+# 	return render(request, 'polls2/detail.html', context)
