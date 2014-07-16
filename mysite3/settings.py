@@ -1,5 +1,5 @@
 """
-Django settings for pollsite project.
+Django settings for mysite3 project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g4)yzx!6tt)(i%48a_6wnmx3b-s(s@jtcx%1z%-32pi&6y(gig'
+SECRET_KEY = '1dy8x+_3iuvhn1lgc8g5_+&(tod)a17(1b1pnyt2n+)(peg3hn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,10 +36,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # third-party apps
-    'south',
-    # local apps
-    'polls'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,9 +47,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'pollsite.urls'
+ROOT_URLCONF = 'mysite3.urls'
 
-WSGI_APPLICATION = 'pollsite.wsgi.application'
+WSGI_APPLICATION = 'mysite3.wsgi.application'
 
 
 # Database
@@ -71,9 +67,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-# TIME_ZONE = None
-# TIME_ZONE = 'UTC'
-TIME_ZONE = 'Asia/Manila'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -86,7 +80,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Template directories
-
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
