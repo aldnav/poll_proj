@@ -35,15 +35,8 @@ class Poll(models.Model):
     def get_number_of_days_past(self):
         delta = str(timezone.now() - self.pub_date).split(':')
         passed = None
-        if int(delta[0]) != 0:
-            if int(delta[0]) >= 24:
-                passed = str(int(delta[0])/24) + ' days'    
-            else:
-                passed = delta[0] + ' hours'
-        elif int(delta[1]) >= 1:
-            passed = delta[1] + ' minutes'
-        else:
-            passed = delta[2].split('.')[0] + ' seconds' 
+        if delta:
+            passed = delta[0].split(',')[0]
         return passed
 
     def save(self, *args, **kwargs):
