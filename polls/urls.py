@@ -6,9 +6,9 @@ urlpatterns = patterns('',
     #/polls/
     url(r'^$', views.IndexView.as_view(), name='index'),
     #/polls/1
-    url(r'^(?P<poll_id>\d+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^(?P<pk>\d+)/$', views.DetailView.as_view(), name='detail'),
     #/polls/1/results
-    url(r'^(?P<poll_id>\d+)/results/$', views.ResultsView.as_view(), name='results'),
+    url(r'^(?P<pk>\d+)/results/$', views.ResultsView.as_view(), name='results'),
     #/polls/1/vote
     url(r'^(?P<poll_id>\d+)/vote/$', views.vote, name='vote'),
 )
