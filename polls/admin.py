@@ -12,7 +12,7 @@ class PollAdmin(admin.ModelAdmin):
         ('Date Info',   {'fields':['pub_date']}),
     ]
     inlines = [ChoiceInline]
-    list_display = ('question', 'pub_date', 'was_published_recently', 'likes')
+    list_display = ('question', 'pub_date', 'was_published_recently', 'likes', 'answers')
     list_filter = ['pub_date']
     search_fields = ['question', 'pub_date']
 
