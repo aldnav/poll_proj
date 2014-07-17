@@ -1,6 +1,13 @@
+{% extends 'polls/base.html' %}
+{% block title %}Welcome to Pollbin!{% endblock %}
+
+{% block body_block %}
+
 {{ poll.question }}
 <ul>
 {% for choice in poll.choice_set.all %}
     <li>{{ choice.votes }} vote{{ choice.votes|pluralize }} {{ choice.choice_text }}</li>
 {% endfor %}
 </ul>
+
+{% endblock %}
