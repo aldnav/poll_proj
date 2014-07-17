@@ -23,9 +23,6 @@ class DetailView(generic.DetailView):
     model = Poll
     template_name = 'polls/detail.html'
 
-    # def get_object(self, *args, **kwargs):
-        # return get_object_or_404(Poll, pk=self.kwargs['poll_id'])
-
     def get_queryset(self, *args, **kwargs):
         return Poll.objects.filter(pub_date__lte=timezone.now())
 
