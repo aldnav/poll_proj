@@ -1,0 +1,12 @@
+body {
+	color: black;
+}
+
+.col-left {
+	background-color: #F5F5F5;
+	color: black;
+}
+
+.col-right {
+	background-color: #DFDCD4;
+}
