@@ -6,6 +6,7 @@ class Poll(models.Model):
     question = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date_published')
     likes = models.IntegerField(default=0)
+    answers = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.question
