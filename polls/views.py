@@ -25,3 +25,32 @@ class DetailView(generic.DetailView):
 
     def get_object(self, *args, **kwargs):
         return get_object_or_404(Poll, pk=self.kwargs['poll_id'])
+
+class ResultsView(generic.DetailView):
+    model = Poll
+    template_name = 'polls/results.html'
+
+    def get_object(self, *args, **kwargs):
+        return get_object_or_404(Poll, pk=self.kwargs['poll_id'])
+
+def vote(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    try:
+        selected_choice = poll.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        return render(request, 'polls/detail.html', {
+            'poll': poll,
+            'error_message': 'Please select a valid choice!'
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        poll.answers += 1
+        poll.save()
+
+        ip = get_ip(request)
+        if ip:
+            voter = Voter(ip=ip, choice_id=selected_choice.id, poll_id=poll.id)
+            voter.save()
+
+        return HttpResponseRedirect(reverse('polls:results', args=(poll.id,)))
