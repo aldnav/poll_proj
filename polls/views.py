@@ -30,9 +30,6 @@ class ResultsView(generic.DetailView):
     model = Poll
     template_name = 'polls/results.html'
 
-    def get_object(self, *args, **kwargs):
-        return get_object_or_404(Poll, pk=self.kwargs['poll_id'])
-
 def vote(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
     try:
