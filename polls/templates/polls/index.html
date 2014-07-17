@@ -1,5 +1,29 @@
+<h3>Latest Polls</h3>
 <ul>
+{% if latest_polls %}
 {% for poll in latest_polls %}
-	<li><a href="{% url 'polls:detail' poll.id%}">{{ poll.question }}</a></li>	
+	<li>
+		<a href="{% url 'polls:detail' poll.id%}">{{ poll.question }}</a>
+		{{ poll.pub_date }}
+		{{ poll.answers }}
+	</li>
 {% endfor %}
 </ul>
+{% else %}
+<p>No polls are available.</p>
+{% endif %}
+
+{% if trending_polls %}
+<h3>Trending Polls</h3>
+<ul>
+{% for poll in trending_polls%}
+	<li>
+		<a href="{% url 'polls:detail' poll.id%}">{{ poll.question }}</a>
+		{{ poll.pub_date }}
+		{{ poll.answers }}
+	</li>	
+{% endfor %}
+</ul>
+{% else %}
+<p>No polls are available.</p>
+{% endif %}
