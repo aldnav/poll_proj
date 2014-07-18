@@ -8,14 +8,15 @@
 		<div class="col-md-12 column">
 			<div class="row clearfix">
 				<div class="col-md-8 column col-left">
-					<h3>Trending Polls</h3>
+					<h4>TRENDING POLLS</h4>
 					{% if trending_polls %}
-					<ul>
+					<ul class="list-inline">
 					{% for poll in trending_polls%}
-						<li>
-							<a href="{% url 'polls:detail' poll.id%}">{{ poll.question }}</a>
-							{{ poll.pub_date }}
-							{{ poll.answers }}
+						<li class="li-card col-md-4">
+							<a href="{% url 'polls:detail' poll.id%}"><p class="question">{{ poll.question }}</p>
+							<span class="glyphicon glyphicon-calendar"></span><span class="detail">{{ poll.pub_date }}</span> 
+							<span class="glyphicon glyphicon-stats"></span><span class="detail">{{ poll.answers }}</span>
+							</a>
 						</li>	
 					{% endfor %}
 					</ul>
@@ -24,20 +25,20 @@
 					{% endif %}
 				</div>
 				<div class="col-md-4 column col-right">
-					<h3>Latest Polls</h3>
+					<h4>LATEST POLLS</h4>
 					<ul>
 					{% if latest_polls %}
 					{% for poll in latest_polls %}
 						<li>
 							<a href="{% url 'polls:detail' poll.id%}">{{ poll.question }}</a>
-							{{ poll.pub_date }}
-							{{ poll.answers }}
+							<!-- {{ poll.pub_date }} -->
+							<!-- {{ poll.answers }} -->
 						</li>
 					{% endfor %}
 					</ul>
 					{% else %}
 					<p>No polls are available.</p>
-					{% endif %}					
+					{% endif %}						
 				</div>
 			</div>
 		</div>
