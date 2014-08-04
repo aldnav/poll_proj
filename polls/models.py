@@ -24,6 +24,9 @@ class Poll(models.Model):
 			passed = delta[0].split(',')[0]
 		return passed
 
+	def get_absolute_url(self):
+		return u"/polls/%s" % self.pk
+
 class Choice(models.Model):
 	poll = models.ForeignKey(Poll)
 	choice_text = models.CharField(max_length=200)
