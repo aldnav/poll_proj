@@ -1,0 +1,14 @@
+{% extends 'polls/base.html' %}
+{% block title %}Welcome to Pollbin!{% endblock %}
+
+{% block body %}
+{% if latest_polls %}
+	<ul>
+	{% for poll in latest_polls %}
+		<li> <a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a> </li>
+	{% endfor %}
+	</ul>
+{% else %}
+	no polls
+{% endif %}
+{% endblock %}
