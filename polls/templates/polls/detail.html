@@ -1,5 +1,6 @@
 {% extends 'polls/base.html' %}
-{% block title %}{{poll.question}}{% endblock %}
+{% load app_filters %}
+{% block title %}{{poll.question|shortify}}...{% endblock %}
 
 {% block body %}
 <h3>{{poll.question}}</h3>

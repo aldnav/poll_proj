@@ -2,66 +2,18 @@
 {% block title %}Welcome to Pollbin!{% endblock %}
 {% load staticfiles %}
 {% block extra_head %}
-<script type="text/javascript" src="{% static 'polls/js/jquery-2.1.1.min.js' %}"></script>
 {% endblock %}
 
 {% block body %}
 {% if latest_polls %}
-	<ul>
-	{% for poll in latest_polls %}
-		<li>
-			<!-- <a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a> -->
-			<h3>{{poll.question}}</h3>
-			<form action=" {% url 'polls:voteajax' poll.id %} " method="post" id='poll{{poll.id}}' class="vote_form"> {% csrf_token %}
-				{% for choice in poll.choice_set.all %}
-				<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
-			    <label for="choice{{ forloop.counter }}">{{choice.choice_text}}</label> 
-			    <br>
-				{% endfor %}
-				<input type="submit" value="VOTE" id="vote{{poll.id}}"/>
-			    {% if error_message %}<p><strong>{{ error.message }}</strong></p>{% endif %}
-			</form>
-		</li>
-	{% endfor %}
-	</ul>
+    <ul>
+    {% for poll in latest_polls %}
+        <li>
+            <a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a>
+        </li>
+    {% endfor %}
+    </ul>
 {% else %}
-	no polls
+    no polls
 {% endif %}
-
-<script type="text/javascript">
-	var create_vote = function(e) {
-		e.preventDefault();
-	    var value = $("form input[name='choice']:checked").val();
-	    console.log(value);
-	    if (value != "") {
-	        var data = { choice:value };
-	        var args = { type:"POST", url:"/polls/{{ poll.id }}/ajaxvote/", data:data, complete:create_vote_complete };
-	        $.ajax(args);
-	    } else {
-	        // We should display a helpful error message
-	    }
-	    return false;
-	};
-
-	// $('.vote_form input[type="submit"]').click(create_vote);
-	var vote_forms = $('.vote_form');
-	for (var i = 0; i < vote_forms.length; i++) {
-		vote_forms[i].click(create_vote);
-	}
-
-	var create_vote_complete = function(res, status) {
-		if (status == 'success') {
-			window.location.href = 'polls/{{ poll.id }}/results/';
-		} else {
-			display_message(res.responseText, $('.message'));
-		}
-	};
-
-	var display_message = function(msg, elem) {
-		var msg_div = $(' <div><p>'+msg+'</p></div> ');
-		elem.append(msg_div).fadeIn('slow').animate({opacity: 1.0}, 700).fadeOut('slow', function() {msg_div.remove();});
-	};
-	
-</script>
-
 {% endblock %}
