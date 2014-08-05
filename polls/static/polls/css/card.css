@@ -1,0 +1,85 @@
+body {
+	font-family: "Lato Regular", "Ubuntu", "Arial";
+}
+
+
+.card-container {
+	margin-top: 1em;
+}
+
+.card {
+	padding: 2em;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+
+.card-color-1,
+.card-color-2,
+.card-color-3,
+.card-color-4,
+.card-color-5,
+.card-color-6 {
+	border-style: solid;
+	border-radius: 4px;
+}
+.card-color-1 a,
+.card-color-2 a,
+.card-color-3 a,
+.card-color-4 a,
+.card-color-5 a,
+.card-color-6 a {
+	color: white;
+}
+
+.card-color-1 {
+	background-color: #E74C3C;
+	color: #E74C3C;
+}
+/*.card-color-1 a {
+	color: #E74C3C;
+}*/
+
+.card-color-2 {
+	background-color: #E67E22;
+	color: #E67E22;
+}
+/*.card-color-2 a {
+	color: #E67E22;	
+}*/
+
+.card-color-3 {
+	background-color: #2ECC71;
+	color: #2ECC71;
+}
+/*.card-color-3 a {
+	color: #2ECC71;	
+}*/
+
+.card-color-4 {
+	background-color: #9B59B6;
+	color: #9B59B6;
+}
+/*.card-color-4 a {
+	color: #9B59B6;
+}*/
+
+.card-color-5 {
+	background-color: #3498DB;
+	color: #3498DB;
+}
+/*.card-color-5 a {
+	color: #3498DB;	
+}*/
+
+.card-color-6 {
+	background-color: #34495E;
+	color: #34495E;
+}
+/*.card-color-6 a {
+	color: #34495E;
+}*/
+
+.card a {
+	font-family: "Lato Light","Ubuntu", "Arial";
+	text-decoration: none;
+}
