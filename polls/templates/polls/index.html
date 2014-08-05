@@ -5,15 +5,20 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
 {% if latest_polls %}
-    <ul>
+    <div class="card-container row clearfix">
     {% for poll in latest_polls %}
-        <li>
-            <a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a>
-        </li>
+        <div class="card col-sm-4 col-md-2 column">
+        	<h4><a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a></h4>            
+        </div>
     {% endfor %}
-    </ul>
+    </div>
 {% else %}
     no polls
 {% endif %}
+	<div class="row clearfix">
+		<p><a href="{% url 'polls:contact' %}">Contact me</a></p>		
+	</div>
+</div>
 {% endblock %}

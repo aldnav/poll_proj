@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %} | Pollbin</title>
     <link href="{% static 'polls/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'polls/css/card.css' %}" rel="stylesheet">
+    <link href="{% static 'polls/css/fonts.css' %}" rel="stylesheet">
     {% block extra_head %}{% endblock %}
 </head>
 <body>
@@ -17,6 +19,7 @@
 {% endblock %}
 {% endblock %}
     <script type="text/javascript" src="{% static 'polls/js/jquery-2.1.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'polls/js/randomcardcolor.js' %}"></script>
     <script type="text/javascript" src="{% static 'polls/js/bootstrap.min.js' %}"></script>
 </body>
 </html>

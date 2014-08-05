@@ -1,16 +1,27 @@
 {% extends 'polls/base.html' %}
+{% load staticfiles %}
 {% load app_filters %}
 {% block title %}{{poll.question|shortify}}...{% endblock %}
-
+{% block extra_head %}
+	<link href="{% static 'polls/css/queform.css' %}" rel="stylesheet">
+{% endblock %}
 {% block body %}
-<h3>{{poll.question}}</h3>
-<form action=" {% url 'polls:vote' poll.id %} " method="post"> {% csrf_token %}
-	{% for choice in poll.choice_set.all %}
-	<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
-    <label for="choice{{ forloop.counter }}">{{choice.choice_text}}</label> 
-    <br>
-	{% endfor %}
-	<input type="submit" value="VOTE"/>
-    {% if error_message %}<p><strong>{{ error.message }}</strong></p>{% endif %}
-</form>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-4 col-md-offset-4 queform">
+			<div class="queform-title">
+				<h3>{{poll.question}}</h3>				
+			</div>
+			<form action=" {% url 'polls:vote' poll.id %} " method="post" role="form"> {% csrf_token %}
+				{% for choice in poll.choice_set.all %}
+				<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
+			    <label for="choice{{ forloop.counter }}">{{choice.choice_text}}</label> 
+			    <br>
+				{% endfor %}
+				<input type="submit" value="VOTE"/>
+			    {% if error_message %}<p><strong>{{ error.message }}</strong></p>{% endif %}
+			</form>
+		</div>
+	</div>
+</div>
 {% endblock %}
